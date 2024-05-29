@@ -168,8 +168,8 @@ onMounted(fetchCharacterData);
 }
 
 .card__img img {
+  max-width: 220px;
   width: 100%;
-  height: 100%;
   margin: 0px;
   opacity: 1;
   transition: opacity 0.5s ease 0s;
