@@ -1,14 +1,18 @@
 <template>
   <main class="main">
     <div class="filter">
-      <input v-model="tempFilterName" placeholder="Поиск по имени" />
-      <select v-model="tempFilterStatus">
-        <option value="">Все</option>
-        <option value="alive">Жив</option>
-        <option value="dead">Мёртв</option>
-        <option value="unknown">Неизвестно</option>
+      <input
+        v-model="tempFilterName"
+        placeholder="Поиск по имени"
+        class="filter__search-bar"
+      />
+      <select v-model="tempFilterStatus" class="filter__select">
+        <option value="">All</option>
+        <option value="alive">Alive</option>
+        <option value="dead">Dead</option>
+        <option value="unknown">Unknown</option>
       </select>
-      <button @click="applyFilters">Применить</button>
+      <button @click="applyFilters" class="filter__btn">Применить</button>
     </div>
     <div class="container">
       <div v-for="character in characters" :key="character.id" class="card">
@@ -26,7 +30,7 @@
           <div class="card__info-body">
             <span>Последнее известное местоположение:</span>
             <p class="card__info-info">
-              {{ character.location?.name}}
+              {{ character.location?.name }}
             </p>
           </div>
 
@@ -40,8 +44,12 @@
       </div>
     </div>
     <div class="pagination">
-      <button @click="prevPage" :disabled="!info.prev">Предыдущая</button>
-      <button @click="nextPage" :disabled="!info.next">Следующая</button>
+      <button @click="prevPage" :disabled="!info.prev" class="pagination__btn">
+        Предыдущая
+      </button>
+      <button @click="nextPage" :disabled="!info.next" class="pagination__btn">
+        Следующая
+      </button>
     </div>
   </main>
 </template>
@@ -92,7 +100,6 @@ const prevPage = () => {
 const applyFilters = () => {
   filterName.value = tempFilterName.value;
   filterStatus.value = tempFilterStatus.value;
-  currentPage.value = 1;
   fetchCharacterData();
 };
 
@@ -112,6 +119,21 @@ onMounted(fetchCharacterData);
   display: flex;
   gap: 10px;
   margin: 20px;
+}
+
+.filter__search-bar {
+  width: 200px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  border: none;
+}
+
+.filter__select {
+  cursor: pointer;
+}
+
+.filter__btn{
+  cursor: pointer;
 }
 
 .container {
@@ -135,7 +157,6 @@ onMounted(fetchCharacterData);
   background: rgb(60, 62, 68);
   border-radius: 0.5rem;
   margin: 0.75rem;
-  margin-top: 80px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
@@ -192,4 +213,13 @@ onMounted(fetchCharacterData);
   gap: 10px;
   margin: 20px;
 }
-</style> 
+
+.pagination__btn {
+  padding: 10px 20px;
+  background: rgb(251, 251, 251);
+  box-shadow: rgba(188, 187, 187, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  border: none;
+  cursor: pointer;
+}
+</style>
